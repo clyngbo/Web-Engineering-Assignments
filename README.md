@@ -18,3 +18,8 @@ Optionally:
 - Ranking
 - Recommandations
 - Registration of users
+
+
+Database: SQL
+Frontend: React/JS framework
+Backend: Java
