@@ -2,7 +2,6 @@
 
 We are developing a webshop application that is able to:
 
-- Keep inventory
 - Simple searches
 - Categorize items
 - Show products
