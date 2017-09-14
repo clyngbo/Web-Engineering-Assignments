@@ -6,7 +6,7 @@ We are developing a webshop application that is able to:
 * Order items
 * Basket/Cart
 
-Inventory section:
+Shop management:
 * View orders from customers
 * Set prices
 * Manage invetory
