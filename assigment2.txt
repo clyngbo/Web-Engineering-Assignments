@@ -1,0 +1,67 @@
+We are developing a webshop application that is able to:
+
+* Simple searches:
+* Categorize items
+* Show products
+* Order items
+* Basket/Cart
+
+Inventory section:
+* View orders from customers
+* Set prices
+* Manage invetory
+
+Optionally:
+* Ranking
+* Recommandations
+* Registration of users
+
+Database: SQL 
+Frontend: JavaScript/HTML/css
+Backend: Java
+
+
+Product Related: 
+
+- What is provided?
+  - Book webshop
+- How is it structured?
+  - Books
+    - Genres
+    - Autors
+  - Shopping cart
+  - Admin section
+    - See orders
+    - Manage inventory, categories
+- How is it presented?
+  - Web page
+  - Webshop
+
+Usage Related:
+
+- Who is using it?
+  - Owners
+  - The customers
+- What resources does the user have?
+  - A computer with internet access
+- Where is the user located?
+  - At home, at work or on the go.
+
+Development Related:
+
+- Who works on it?
+  - Two students
+- How is it developed?
+  - In weekly iterations
+- What resources are available?
+  - Two computers
+- How is it integrated?
+  ?
+
+Evolution:
+
+- Have technologies or requirements changed? 
+- Was any requirement unfulfilled?
+- Can it be improved?
+
+  - Will be sort out later.
