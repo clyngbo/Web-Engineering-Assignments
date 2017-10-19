@@ -9,8 +9,8 @@
         <module name="DatabaseAccess" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="BookShop" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="BookShop" target="1.8" />
       <module name="DatabaseAccess" target="8" />
     </bytecodeTargetLevel>
   </component>
