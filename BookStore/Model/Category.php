@@ -12,8 +12,10 @@ class Category
     private $conn;
     public $id;
     public $name;
+    public $books;
     public function __construct() {
         $this->conn = new DBConnection();
+        $this->books = new ArrayObject();
     }
     
     public function loadCategory($id)
@@ -25,7 +27,23 @@ class Category
             $this->id = $row['id'];
             $this->name = $row['name'];
         }
+        $this->loadBooks();
     }
+    
+    public function loadBooks()
+    {
+        $sql = "SELECT * FROM book_category WHERE category_id = $this->id";
+        $result = $this->conn->query($sql);
+        while($row = $result->fetch_assoc())
+        {
+            $book_id = $row['book_id'];
+            $book = new Book();
+            $book->loadBookByID($book_id);
+            $this->books->append($book);
+        }
+    }
+
+
     public function createCategory()
     {
         return $this->conn->statementReturnID("INSERT INTO `category` (`name`) VALUES ('$this->name');");
