@@ -107,10 +107,10 @@ DROP TABLE IF EXISTS `order_book`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_book` (
   `book_id` int(11) NOT NULL,
-  `order:id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `count` int(11) NOT NULL,
-  PRIMARY KEY (`book_id`,`order:id`),
-  KEY `OrderID_idx` (`order:id`)
+  PRIMARY KEY (`book_id`,`order_id`),
+  KEY `OrderID_idx` (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
