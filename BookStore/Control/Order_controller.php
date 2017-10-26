@@ -27,10 +27,25 @@ class Order_controller {
         $order->loadOrder($id);
         return $order;
     }
-    
+    /**
+     * Gets details of an order
+     * @return ArrayObject Array with BookOrder objects
+     * @param Order $order
+     */
     public function getOrderDetails(Order $order)
     {
-        
+        $bookOrders = new ArrayObject();
+        $sql = "SELECT * FROM book_order WHERE order_id = $order->id";
+        $result = $this->conn->query($sql);
+        while($row = $result->fetch_assoc())
+        {
+            $book_order = new BookOrder();
+            $book_order->book_id = $row['book_id'];
+            $book_order->order_id = $row['order_id'];
+            $book_order->count = $row['count'];
+            $bookOrders->append($book_order);
+        }
+        return $bookOrders;
     }
 
     public function deleteOrder(Order $order)
