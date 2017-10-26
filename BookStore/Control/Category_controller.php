@@ -45,4 +45,18 @@ class Category_controller {
         $cat->loadCategory($id);
         return $cat;
     }
+    
+    public function getAllCategories()
+    {
+        $sql = "SELECT * FROM Category";
+        $result = $this->conn->query($sql);
+        $categories = new ArrayObject();
+        while($row = $result->fetch_assoc())
+        {
+            $cat = new Category();
+            $cat->loadCategory($row['id']);
+            $categories->append($cat);
+        }
+        return $categories;
+    }
 }
