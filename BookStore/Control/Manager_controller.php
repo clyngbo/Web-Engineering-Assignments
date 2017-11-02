@@ -21,22 +21,8 @@ class Manager_controller {
         $this->conn = new DBConnection();
     }
     
-    public function createManager(Manager $manager)
-    {
-        return $manager->createManager();
-    }
     
-    public function deleteManager(Manager $manager)
-    {
-        return $manager->deleteManager();
-    }
-    
-    public function updateManager(Manager $manager)
-    {
-        return $manager->updateManager();
-    }
-    
-    public function loadManager($name)
+    public function loadManagerByName($name)
     {
         $sql = "SELECT * FROM Manager WHERE username = $name";
         $manager = new Manager();
@@ -52,13 +38,39 @@ class Manager_controller {
     
     public function checkCredentials(Manager $manager)
     {
-        $managerOrg = $this->loadManager($manager->username);
+        $managerOrg = $this->loadManagerByName($manager->username);
         if($manager->password === $managerOrg->password)
         {
-            return True;
+            return TRUE;
         }
          else {
              return FALSE;
          }
+    }
+    
+     public function loadManagerById($id)
+    {
+        $sql = "SELECT * FROM manager WHERE id = $id";
+        $result = $this->conn->query($sql);
+        while ($row = $result->fetch_assoc())
+        {
+            $this->username = $row['username'];
+            $this->password = $row['password'];
+            $this->id = $row['id'];
+        }
+    }
+    public function createManager(Manager $manager)
+    {
+        $sql = "INSERT INTO `manager` (`username`, `password`) VALUES ('$manager->username', '$manager->password');";
+        return $this->conn->statementReturnID($sql);
+    }
+    
+    public function deleteManager(Manager $manager)
+    {
+        return $this->conn->statement("DELETE FROM `manager` WHERE id = $manager->id");
+    }
+    public function updateManager(Manager $manager)
+    {
+        return $this->conn->statement("UPDATE `manager` SET `username`='$manager->username', `password`='$manager->password' WHERE `id`='$manager->id';");
     }
 }

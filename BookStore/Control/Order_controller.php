@@ -21,50 +21,22 @@ class Order_controller {
         $this->conn = new DBConnection();
     }
     
-    public function getOrder($id)
-    {
-        $order = new Order();
-        $order->loadOrder($id);
-        return $order;
-    }
-    /**
-     * Gets details of an order
-     * @return ArrayObject Array with BookOrder objects
-     * @param Order $order
-     */
-    public function getOrderDetails(Order $order)
-    {
-        $bookOrders = new ArrayObject();
-        $sql = "SELECT * FROM book_order WHERE order_id = $order->id";
-        $result = $this->conn->query($sql);
-        while($row = $result->fetch_assoc())
-        {
-            $book_order = new BookOrder();
-            $book_order->book_id = $row['book_id'];
-            $book_order->order_id = $row['order_id'];
-            $book_order->count = $row['count'];
-            $bookOrders->append($book_order);
-        }
-        return $bookOrders;
-    }
 
-    public function deleteOrder(Order $order)
+
+    public function deleteOrderAndDetails(Order $order)
     {
-        $book_order = new BookOrder();
-        if($book_order->deleteBookOrder() && $order->deleteOrder())
+        $book_orders = $this->loadBookOrder($order->id);
+        foreach ($book_orders as $b)
         {
-            return true;
+            $this->deleteBookOrder($b);
         }
-        else
-        {
-            return false;
-        }
+        return $this->deleteOrder($order);
     }
     
-    public function createOrder(Order $order, ArrayObject $bookOrders)
+    public function createOrderWithBooks(Order $order, ArrayObject $bookOrders)
     {
         $success = FALSE;
-        $order_id = $order->createOrder();
+        $order_id = $this->createOrder();
         if($order_id == 0)
         {
             return $success;
@@ -73,7 +45,7 @@ class Order_controller {
         foreach ($bookOrders as $b)
         {
             $b->order_id = $order_id;
-            if($b->createBookOrder() == FALSE)
+            if($this->createBookOrder($b) == FALSE)
             {
                 return $success;
             }
@@ -81,21 +53,70 @@ class Order_controller {
         $success = TRUE;
         return $success;
     }
-    /**
-     * Update things like name and address.
-     * @param Order $order
-     * @return boolean
-     */
+
+    
+    public function loadBookOrder($order_id)
+    {
+        $sql = "SELECT * FROM order_book WHERE order_id = $order_id";
+        $result = $this->conn->query($sql);
+        $book_orders = new ArrayObject();
+        while($row = $result->fetch_assoc())
+        {
+            $book_order = new BookOrder();
+            $book_order->book_id = $row['book_id'];
+            $book_order->order_id = $row['order_id'];
+            $book_order->count = $row['count'];
+            $book_orders->append($book_order);
+        }
+        return $book_orders;
+    }
+    
+    public function createBookOrder(BookOrder $book_order)
+    {
+        return $this->conn->statementReturnID("INSERT INTO `order_book` (`book_id`, `order_id`, `count`) VALUES ('$book_order->book_id', '$book_order->order_id', '$book_order->count');");
+    }
+    public function deleteBookOrder(BookOrder $book_order)
+    {
+        return $this->conn->statement("DELETE FROM order_book WHERE order_id = $book_order->order_id");
+    }
+    public function updateBookOrder(BookOrder $book_order)
+    {
+        return $this->conn->statement("UPDATE `order_book` SET `book_id`='$book_order->book_id', `count`='$book_order->count' WHERE `order_id`='$book_order->order_id';");
+    }
+    
+    public function loadOrder($id)
+    {
+        $sql = "SELECT * FROM `order` WHERE id = $id";
+        $result = $this->conn->query($sql);
+        $order = new Order();
+        while($row = $result->fetch_assoc())
+        {
+            $order->id = $row['id'];
+            $order->city = $row['city'];
+            $order->address = $row['address'];
+            $order->name = $row['name'];
+            $order->postcode = $row['postcode'];
+            $order->status = $row['status'];
+        }
+        return $order;
+    }
+    
+    public function createOrder(Order $order)
+    {
+         $sql = "INSERT INTO `order` (`name`, `address`, `city`, `postcode`, `status`) VALUES ('$order->name', '$order->address', '$order->city', '$order->postcode', '$order->status');";
+         return $this->conn->statementReturnID($sql);
+    }
+    
+    
+    public function deleteOrder(Order $order)
+    {
+        $sql = "DELETE FROM `order` WHERE `id`='$order->id';";
+        return $this->conn->statement($sql);
+    }
+    
     public function updateOrder(Order $order)
     {
-        return $order->updateOrder();
-    }
-    /**
-     * Updates counts of books and books ordered.
-     * @param BookOrder $book_order Instance of BookOrder with the new count of books ordered
-     */
-    public function updateOrderDetails(BookOrder $book_order)
-    {
-        return $book_order->updateBookOrder();
+        $sql = "UPDATE `order` SET `name`='$order->name', `address`='$order->address', `city`='$order->city', `postcode`='$order->postcode', `status`='$order->status' WHERE `id`='$order->id';";
+        return $this->conn->statement($sql);
     }
 }

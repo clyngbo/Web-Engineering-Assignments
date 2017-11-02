@@ -21,10 +21,7 @@ class Category_controller {
         $this->conn = new DBConnection();
     }
     
-    public function createCategory(Category $category)
-    {
-        $category->createCategory();
-    }
+    
     
     public function deleteCategory(Category $category)
     {
@@ -34,17 +31,9 @@ class Category_controller {
         $this->conn->statement($sql);
     }
     
-    public function updateCategory(Category $category)
-    {
-        return $category->updateCategory();
-    }
+
     
-    public function getCategory($id)
-    {
-        $cat = new Category();
-        $cat->loadCategory($id);
-        return $cat;
-    }
+
     
     public function getAllCategories()
     {
@@ -53,10 +42,51 @@ class Category_controller {
         $categories = new ArrayObject();
         while($row = $result->fetch_assoc())
         {
-            $cat = new Category();
-            $cat->loadCategory($row['id']);
+            $cat = $this->loadCategory($row['id']);
             $categories->append($cat);
         }
         return $categories;
+    }
+    
+     public function loadCategory($id)
+    {
+        $sql = "SELECT * FROM category WHERE id = $id";
+        $result = $this->conn->query($sql);
+        $category = new Category();
+        while($row = $result->fetch_assoc())
+        {
+            $category->id = $row['id'];
+            $category->name = $row['name'];
+        }
+        $category = $this->loadBooks($category);
+        return $category;
+    }
+    
+    public function loadBooks(Category $category)
+    {
+        $sql = "SELECT * FROM book_category WHERE category_id = $this->id";
+        $result = $this->conn->query($sql);
+        
+        $book_ctr = new Book_controller();
+        
+        while($row = $result->fetch_assoc())
+        {
+            $book_id = $row['book_id'];
+            $book = $book_ctr->getBookByID($book_id);
+            
+            $category->books->append($book);
+        }
+        return $category;
+    }
+
+
+    public function createCategory(Category $category)
+    {
+        return $this->conn->statementReturnID("INSERT INTO `category` (`name`) VALUES ('$category->name');");
+    }
+  
+    public function updateCategory(Category $category)
+    {
+        return $this->conn->statement("UPDATE `bookstore`.`category` SET `name`='$category->name' WHERE `id`='$category->id';");    
     }
 }

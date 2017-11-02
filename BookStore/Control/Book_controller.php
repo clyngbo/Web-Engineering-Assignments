@@ -29,41 +29,13 @@ class Book_controller {
         while ($row = $result->fetch_assoc())
         {
             $id = $row['id'];
-            $book = new Book();
-            $book->loadBookByID($id);
+            $book = $this->getBookByID($id);
             $books->append($book);
         }
         return $books;
     }
     
-    public function getBook($id)
-    {
-        $book = new Book();
-        $book->loadBookByID($id);
-        return $book;
-    }
     
-    public function createBook(Book $book)
-    {
-        return $book->createBook();
-    }
-    
-    public function deleteBook(Book $book)
-    {
-        return $book->deleteBook();
-    }
-    
-    public function updateBook(Book $book)
-    {
-        return $book->updateBook();
-    }
-    
-    public function getCategoriesForBook($book_id)
-    {
-        $book = new Book();
-        $book->loadBookByID($book_id);
-        return $book->categories;
-    }
     
     public function deleteBookCategory(Category $category, Book $book)
     {
@@ -74,6 +46,60 @@ class Book_controller {
     public function addCategoryToBook(Category $category, Book $book)
     {
         $sql = "INSERT INTO book_category(book_id, category_id) VALUES($book->id, $category->id)";
+        return $this->conn->statement($sql);
+    }
+    /**
+     * @todo It is not completed yet
+     * @return Book $book
+     * @param Book $book
+     */
+    public function getCategoriesForBook(Book $book)
+    {
+        $sql = "SELECT * FROM book_category WHERE book_id = $book->id";
+        $result = $this->conn->query($sql);
+        $categories = new ArrayObject();
+        while ($row = $result->fetch_assoc())
+        {
+            $book_id = $row['book_id']; //NOT COMPLETE
+            $category = new Category();
+            $category->loadCategory($book_id);
+        }
+    }
+
+    public function getBookByID($id)
+    {
+        $sql = "SELECT * FROM Book WHERE id = $id";
+        $book = new Book();
+        $result = $this->conn->query($sql);
+        while ($row = $result->fetch_assoc())
+        {
+            $book->id = $row['id'];
+            $book->title = $row['title'];
+            $book->author = $row['author'];
+            $book->genre = $row['genre'];
+            $book->price = $row['price'];
+            $book->description = $row['description'];
+            $book->inventory = $row['inventory'];
+        }
+        $book->categories = $this->getCategoriesForBook($book);
+        return $book;
+    }
+    
+    public function createBook(Book $book)
+    {
+        $sql = "INSERT INTO `book` (`title`, `author`, `genre`, `price`, `inventory`, `description`) VALUES ('$book->title', '$book->author', '$book->genre', '$book->price', '$book->inventory', '$book->description');";
+        return $this->conn->statementReturnID($sql);
+    }
+    
+    public function deleteBook(Book $book)
+    {
+        $sql = "DELETE FROM Book WHERE id = $book->id";
+        return $this->conn->statement($sql);
+    }
+    
+    public function updateBook(Book $book)
+    {
+        $sql = "UPDATE `book` SET `title`='$book->title', `author`='$book->author', `genre`='$book->genre', `price`='$book->price', `inventory`='$book->inventory', `description`='$book->description' WHERE `id`='$book->id';";
         return $this->conn->statement($sql);
     }
    
