@@ -1,0 +1,78 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-Nov-2017, 07:26:12
+    Author     : Christian
+*/
+
+.navClass{
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top:-16px;
+    left:0;
+    opacity: 1;
+    display: block;
+    margin: auto;
+}
+
+.navClass > ul {
+    background-color: black;
+    color: white;
+    /*font-size: 16px;*/
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.navClass > ul > li{
+    list-style-type: none;
+    display: inline-block;
+    padding: 5px 25px;
+    position: relative;
+    text-align: left;
+}
+
+.navClass > ul > li:hover{
+    background-color:  white;
+    color: black;
+}
+
+ul.sub-menu{
+    position: absolute;
+    background-color:  black;
+    list-style-type: none;
+    width: 200px;
+    padding-left: 0px;
+    margin-left: -25px;
+    padding-top: 5px;
+    opacity: 0;
+    display: none;
+}
+
+
+ul.sub-menu li{
+    padding-left: 25px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+ul.sub-menu li a {
+    text-decoration: none;
+    color: white;
+}
+ul.sub-menu li a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.navClass li:hover .sub-menu{
+    opacity: 1;
+    display: block;
+}
+ul.sub-menu li:hover{
+    color: black;
+    background-color: white;
+}
