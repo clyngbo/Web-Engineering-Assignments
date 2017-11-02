@@ -30,6 +30,7 @@ class Book_controller {
         {
             $id = $row['id'];
             $book = $this->getBookByID($id);
+            $book = $this->getCategoriesForBook($book);
             $books->append($book);
         }
         return $books;
@@ -49,7 +50,7 @@ class Book_controller {
         return $this->conn->statement($sql);
     }
     /**
-     * @todo It is not completed yet
+     * 
      * @return Book $book
      * @param Book $book
      */
@@ -57,13 +58,17 @@ class Book_controller {
     {
         $sql = "SELECT * FROM book_category WHERE book_id = $book->id";
         $result = $this->conn->query($sql);
+        $category_ctr = new Category_controller();
         $categories = new ArrayObject();
         while ($row = $result->fetch_assoc())
         {
-            $book_id = $row['book_id']; //NOT COMPLETE
+            $book_id = $row['book_id'];
+            $category_id = $row['category_id'];
             $category = new Category();
-            $category->loadCategory($book_id);
+            $category = $category_ctr->loadCategory($category_id);
+            $categories->append($category);
         }
+        return $categories;
     }
 
     public function getBookByID($id)

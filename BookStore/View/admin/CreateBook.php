@@ -6,9 +6,11 @@ and open the template in the editor.
 -->
 <?php
 include_once 'init.php';
+
 if(isset($_POST['create-book-btn']))
 {
     $book_ctr = new Book_controller();
+    $category_ctr = new Category_controller();
     $book = new Book();
     $book->author = $_POST['author'];
     $book->description = $_POST['description'];
@@ -19,8 +21,7 @@ if(isset($_POST['create-book-btn']))
     $book->id = $book_ctr->createBook($book);
     foreach ($_POST['category'] as $cat)
     {
-        $category = new Category();
-        $category->loadCategory($cat);
+        $category = $category_ctr->loadCategory($book->id);
         $book_ctr->addCategoryToBook($category, $book);
     }
 }
@@ -31,7 +32,7 @@ if(isset($_POST['create-book-btn']))
         <title>Create Book</title>
     </head>
     <body>
-        
+        <?php? include_once 'menu.php'; ?>
         <form action="CreateBook.php" method="post" id="create-book-form">
             <table>
                 <tr>
