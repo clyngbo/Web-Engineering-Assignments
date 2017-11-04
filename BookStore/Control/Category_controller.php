@@ -4,6 +4,8 @@ include_once '../Model/Category.php';
 include_once '../Model/Order.php';
 include_once '../Model/Manager.php';
 include_once '../Model/BookOrder.php';
+include_once 'Book_controller.php';
+include_once 'DBConnection.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,8 +21,7 @@ class Category_controller {
     private $conn;
     public function __construct() {
         $this->conn = new DBConnection();
-    }
-    
+    }  
     
     
     public function deleteCategory(Category $category)
@@ -30,11 +31,7 @@ class Category_controller {
         $sql = "DELETE FROM category WHERE category_id = $category->id";
         $this->conn->statement($sql);
     }
-    
-
-    
-
-    
+     
     public function getAllCategories()
     {
         $sql = "SELECT * FROM Category";
@@ -58,13 +55,12 @@ class Category_controller {
             $category->id = $row['id'];
             $category->name = $row['name'];
         }
-        $category = $this->loadBooks($category);
         return $category;
     }
     
     public function loadBooks(Category $category)
     {
-        $sql = "SELECT * FROM book_category WHERE category_id = $this->id";
+        $sql = "SELECT * FROM book_category WHERE category_id = $category->id";
         $result = $this->conn->query($sql);
         
         $book_ctr = new Book_controller();
@@ -78,7 +74,6 @@ class Category_controller {
         }
         return $category;
     }
-
 
     public function createCategory(Category $category)
     {

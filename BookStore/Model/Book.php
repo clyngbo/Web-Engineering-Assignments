@@ -16,6 +16,9 @@ class Book
     public $inventory;
     public $description;
     public $categories;
+    public $added;
+    public $discount;
+    public $picture;
     function __construct() 
     {
         

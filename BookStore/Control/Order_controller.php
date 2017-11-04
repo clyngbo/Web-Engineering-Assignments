@@ -4,6 +4,7 @@ include_once '../Model/Category.php';
 include_once '../Model/Order.php';
 include_once '../Model/Manager.php';
 include_once '../Model/BookOrder.php';
+include_once 'DBConnection.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,8 +22,6 @@ class Order_controller {
         $this->conn = new DBConnection();
     }
     
-
-
     public function deleteOrderAndDetails(Order $order)
     {
         $book_orders = $this->loadBookOrder($order->id);
