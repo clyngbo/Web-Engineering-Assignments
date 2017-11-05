@@ -89,21 +89,26 @@ h5 {
     color: #00004d;
 }
 
+h6 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
 a {
     font-family: "Tahoma", "Geneva", "sans-serif";
     color: #00004d;
 }
 
 #header {
-    top: 10pt;
+    top: 5pt;
     padding-left: 15pt;
     padding-right: 15pt;
-    height: 100pt;
+    height: 20pt;
 }
 
 #header #store_name h1 {
     color: #00004d;
-    font-size: 3em;
+    font-size: 3.5em;
     position: relative;
 }
 
@@ -171,7 +176,7 @@ a {
   left: 15pt;
   background-color: #00004d;
   overflow-x: hidden;
-  padding-top: 10pt;
+  padding-top: 0pt;
 }
 
 #categories-outer h2 {
@@ -203,4 +208,44 @@ a {
 
 .category {
    margin-top: 7pt;
+}
+
+.book_section a {
+    text-decoration: none
+}
+
+.book_section a:visited {
+    text-decoration: none
+}
+
+.book_section h3 {
+    font-size: 2em;
+    margin-top: 0pt;
+}
+
+.book_section_item_content{
+    padding-left: 120pt;
+}
+
+.book_section_item_content h5 {
+    font-size: 1.7em;
+    margin-bottom: 0pt;
+    margin-top:0pt;
+}
+
+.book_section_item_content h6 {
+    font-size: 1.2em;
+    margin-bottom: 0pt;
+    margin-top:0pt;
+}
+
+.book_section_item img {
+    height: 150pt;
+    width: automatic; 
+    float: left;
+}
+
+.book_section_item {
+    float: left;
+    height: 160pt;
 }

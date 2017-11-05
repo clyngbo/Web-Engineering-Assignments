@@ -7,7 +7,7 @@ if (!isset($_GET['id'])) {
     }
 
 $category = $category_controler->loadCategory($_GET['id']) ;
-$category_books = $category_controler->loadBooks($category);
+$category_books = $category_controler->getBooksForCategory($category);
 ?>
 <!DOCTYPE html>
  
@@ -29,19 +29,27 @@ $category_books = $category_controler->loadBooks($category);
          <?php
             getCategories();
          ?>
-         <div id="book_section">
-             <h3>Books in category <?php echo $category->name; ?></h3>             
+         <div class='main'>
+         <div class="book_section">
+             <h3>Books in category <?php echo $category->name; ?></h3> 
+             <hr>
              <?php
                 if(!empty($category_books))
                 {
                     foreach($category_books as $book)
                     {
                         ?>
-                <div class="book_category_item">
-                    <a href='book.php?id=<?php echo $book->id; ?>'>
-                        <?php echo $book->title ; ?>                        
-                    </a>                        
+                <div class="book_section_item">
+                    <a href='book.php?id=<?php echo $book->id; ?>'>                        
+                        <div class='book_section_item_image'><img src='../Images/<?php echo $book->picture; ?>' /></div>
+                        <div class='book_section_item_content'>
+                            <h5><?php echo $book->title; ?></h5>
+                            <h6><?php echo $book->author; ?> </h6> 
+                            <p><?php echo $book->description; ?></p>
+                        </div>
+                    </a> 
                 </div>
+                <hr>
                         <?php
                     }
                 }
@@ -50,6 +58,7 @@ $category_books = $category_controler->loadBooks($category);
                 }
                 ?>
          </div>         
+         </div>
      </body>
  </html>
 

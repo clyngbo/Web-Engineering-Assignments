@@ -58,7 +58,7 @@ class Category_controller {
         return $category;
     }
     
-    public function loadBooks(Category $category)
+    public function getBooksForCategory(Category $category)
     {
         $sql = "SELECT * FROM book_category WHERE category_id = $category->id";
         $result = $this->conn->query($sql);
@@ -69,8 +69,7 @@ class Category_controller {
         while($row = $result->fetch_assoc())
         {
             $book_id = $row['book_id'];
-            $book = $book_ctr->getBookByID($book_id);
-            
+            $book = $book_ctr->getBookByID($book_id);            
             $books->append($book);
         }
         return $books;

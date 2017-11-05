@@ -149,5 +149,23 @@ class Book_controller {
         }
         return $books;
     }
+    
+    public function searchBooks(string $query)
+    {
+        $words = explode(' ', $query);
+        $authors_where = implode ("%' OR author LIKE '%", $words);  
+        $titles_where = implode ("%' OR title LIKE '%", $words);
+
+        $sql = "SELECT id FROM book WHERE author LIKE '%$authors_where%' OR title LIKE '%$titles_where%'";
+        $result = $this->conn->query($sql);     
+        $books = new ArrayObject();
+        while ($row = $result->fetch_assoc())
+        {
+            $id = $row['id'];
+            $book = $this->getBookByID($id);
+            $books->append($book);
+        }
+        return $books;
+    }
 }
 ?>
