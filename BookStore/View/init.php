@@ -13,7 +13,6 @@ foreach (glob("Control/*.php") as $filename)
 include_once 'books.php';
 include_once 'cart.php';
 include_once 'categories.php';
-include_once 'index.php';
 include_once 'footer.php';
 include_once 'header.php';
 

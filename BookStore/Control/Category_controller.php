@@ -45,7 +45,7 @@ class Category_controller {
         return $categories;
     }
     
-     public function loadCategory($id)
+     public function loadCategory(int $id)
     {
         $sql = "SELECT * FROM category WHERE id = $id";
         $result = $this->conn->query($sql);
@@ -63,16 +63,17 @@ class Category_controller {
         $sql = "SELECT * FROM book_category WHERE category_id = $category->id";
         $result = $this->conn->query($sql);
         
-        $book_ctr = new Book_controller();
+        $book_ctr = new Book_controller();        
+        $books = new ArrayObject();
         
         while($row = $result->fetch_assoc())
         {
             $book_id = $row['book_id'];
             $book = $book_ctr->getBookByID($book_id);
             
-            $category->books->append($book);
+            $books->append($book);
         }
-        return $category;
+        return $books;
     }
 
     public function createCategory(Category $category)

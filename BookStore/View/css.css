@@ -8,3 +8,199 @@ and open the template in the editor.
     Author     : eiva
 */
 
+.book_list h4 {
+    margin-top: 0pt;
+}
+
+.book_list {
+    margin-bottom: 10pt;
+}
+
+.book_list h4 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.book_list td {
+    vertical-align  : top
+}
+
+.book_item {
+    width: 100pt;
+}
+
+.book_list  td {
+    padding-right: 50pt;
+}
+
+.book_item h5 {
+    font-size: 1.5em;
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+.book_item p {
+    font-size: 1em;
+    margin-top: 3pt;
+    margin-bottom: 0em;
+}
+
+.book_item a:visited p {
+    text-decoration: none;    
+}
+
+.book_item a {
+    text-decoration: none;    
+}
+
+.book_item img {
+    height: 150pt;
+    width: auto;
+    text-align: center;
+}
+
+
+p {
+     font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+h1 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+h2 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+h3 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+h4 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+h5 {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+a {
+    font-family: "Tahoma", "Geneva", "sans-serif";
+    color: #00004d;
+}
+
+#header {
+    top: 10pt;
+    padding-left: 15pt;
+    padding-right: 15pt;
+    height: 100pt;
+}
+
+#header #store_name h1 {
+    color: #00004d;
+    font-size: 3em;
+    position: relative;
+}
+
+#header #store_name {
+    width: 300pt
+}
+
+#header #store_name img {
+    width: auto;
+    float: left;
+    height: 4em;
+}
+
+#header a:visited{
+    color: #00004d;
+    text-decoration: none;
+}
+
+#tfnewsearch{
+        float:right;
+        padding:20px;
+}
+.tftextinput{
+        margin: 0;
+        padding: 5pt 15pt;
+        font-family: "Tahoma", "Geneva", "sans-serif";
+        font-size:12pt;
+        border:1pt solid #00004d; border-right:0pt;
+}
+.tfbutton {
+        margin: 0;
+        padding: 5pt 15pt;
+        font-family: "Tahoma", "Geneva", "sans-serif";
+        font-size:12pt;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        border: solid 1pt #00004d; border-right:0pt;
+        background: #00004d;
+        background: -webkit-gradient(linear, left top, left bottom, from(#00004d), to(#00004d));
+        background: -moz-linear-gradient(top,  #00004d,  #00004d);
+}
+/* Fixes submit button height problem in Firefox */
+.tfbutton::-moz-focus-inner {
+  border: 0;
+}
+.tfclear{
+        clear:both;
+}
+
+#categories-outer {
+    top: 10pt;
+    padding-left: 15pt;
+    padding-right: 15pt;
+}
+
+#categories-outer {
+  height: 100%;
+  width: 170pt;
+  position: absolute;
+  z-index: 1;
+  top: 100pt;
+  left: 15pt;
+  background-color: #00004d;
+  overflow-x: hidden;
+  padding-top: 10pt;
+}
+
+#categories-outer h2 {
+    font-size: 2em;
+    color: #ffffff;
+}
+
+#categories-outer {
+  color: #ffffff;
+}
+
+#categories-outer a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+
+#categories-outer a:visited {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+
+/* Page content */
+.main {
+  margin-left: 250pt; /* Same as the width of the sidenav */
+  
+}
+
+.category {
+   margin-top: 7pt;
+}

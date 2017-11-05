@@ -15,7 +15,7 @@ function getCategories()
     ?>
 <div id="categories-outer">
             <div id="categories-heading">
-                <h3>Categories</h3>
+                <h2>Categories</h2>
             </div>    
             <div id="categories">
                 <?php
@@ -24,8 +24,10 @@ function getCategories()
                     foreach($categories as $cat)
                     {
                         ?>
-                <div id="category">                   
+                <div class="category">
+                    <a href='category.php?id=<?php echo $cat->id; ?>'>
                         <?php echo $cat->name; ?>
+                    </a>                        
                 </div>
                         <?php
                     }

@@ -11,6 +11,7 @@ $most_ordered_books = $book_controller->getMostOrderedBooks();
      <head>
         <meta charset="UTF-8">
         <meta name="description" content="Perfect book shop.">
+        <link rel="shortcut icon" type="image/png" href="../Images/favicon.png"/>
         <?php
             getCSS();
         ?>
@@ -24,20 +25,27 @@ $most_ordered_books = $book_controller->getMostOrderedBooks();
          <?php
             getCategories();
          ?>
-         <div id="book_list">
-             <p>
+         <div class="main">
+         <div class="book_list">
+             <h4>
                  New in the store
-             </p>
+             </h4>
+             <table>
              <?php
                 if(!empty($newest_books))
                 {
                     foreach($newest_books as $book)
                     {
             ?>
-                <div id="book_item">                   
-                        <?php echo $book->title; ?>
-                    
+                <td>
+                <div class="book_item">
+                    <a href='book.php?id=<?php echo $book->id; ?>'>
+                        <img src='../Images/<?php echo $book->picture; ?>' />
+                        <h5><?php echo $book->title; ?> </h5>
+                        <p><?php echo $book->author; ?> </p>
+                    </a>
                 </div>
+                </td>
                         <?php
                     }
                 }
@@ -45,21 +53,28 @@ $most_ordered_books = $book_controller->getMostOrderedBooks();
                     echo 'No new books';
                 }
             ?>
+             </table>
          </div>
-         <div id="book_list">
-             <p>
+         <div class="book_list">
+             <h4>
                  Customers often buy
-             </p>
+             </h4>
+             <table>
              <?php
                 if(!empty($most_ordered_books))
                 {
                     foreach($most_ordered_books as $book)
                     {
                         ?>
-                <div id="book_item">                   
-                        <?php echo $book->title; ?>
-                    
+                <td>
+                <div class="book_item">
+                    <a href='book.php?id=<?php echo $book->id; ?>'>
+                        <img src='../Images/<?php echo $book->picture; ?>' />
+                        <h5><?php echo $book->title; ?> </h5>
+                        <p><?php echo $book->author; ?> </p>
+                    </a>
                 </div>
+                </td>
                         <?php
                     }
                 }
@@ -67,20 +82,28 @@ $most_ordered_books = $book_controller->getMostOrderedBooks();
                     echo 'No popular books available';
                 }
             ?>
-         <div id="book_list">
-             <p>              
+             </table>
+         </div>
+         <div class="book_list">
+             <h4>              
                  Today's special offers            
-             </p>
+             </h4>
+             <table>
              <?php
-                if(!empty($newest_books))
+                if(!empty($special_offer_books))
                 {
-                    foreach($newest_books as $book)
+                    foreach($special_offer_books as $book)
                     {
                         ?>
-                <div id="book_item">                   
-                        <?php echo $book->title; ?>
-                    
+                <td>
+                <div class="book_item">
+                    <a href='book.php?id=<?php echo $book->id; ?>'>
+                        <img src='../Images/<?php echo $book->picture; ?>' />
+                        <h5><?php echo $book->title; ?> </h5>
+                        <p><?php echo $book->author; ?> </p>
+                    </a>
                 </div>
+                </td>
                         <?php
                     }
                 }
@@ -88,6 +111,7 @@ $most_ordered_books = $book_controller->getMostOrderedBooks();
                     echo 'No books are on sale today.';
                 }
             ?>
+             </table>
          </div>
      </body>
  </html>

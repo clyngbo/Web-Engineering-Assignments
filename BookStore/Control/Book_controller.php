@@ -110,7 +110,7 @@ class Book_controller {
     
     public function getNewestBooks() 
     {
-        $sql = "SELECT id FROM book ORDER BY added DESC LIMIT 10";
+        $sql = "SELECT id FROM book ORDER BY added DESC LIMIT 5";
         $books = new ArrayObject();
         $result = $this->conn->query($sql);
         while ($row = $result->fetch_assoc())
@@ -124,7 +124,7 @@ class Book_controller {
     
     public function getSpecialOfferBooks() 
     {
-        $sql = "SELECT id FROM book ORDER BY discount DESC LIMIT 10";
+        $sql = "SELECT id FROM book ORDER BY discount DESC LIMIT 5";
         $books = new ArrayObject();
         $result = $this->conn->query($sql);
         while ($row = $result->fetch_assoc())
@@ -138,7 +138,7 @@ class Book_controller {
     
     public function getMostOrderedBooks() 
     {
-        $sql = "SELECT id FROM book INNER JOIN order_book ON book.id = order_book.book_id GROUP BY book.id ORDER BY count(*) DESC LIMIT 10";
+        $sql = "SELECT id FROM book INNER JOIN order_book ON book.id = order_book.book_id GROUP BY book.id ORDER BY count(*) DESC LIMIT 5";
         $books = new ArrayObject();
         $result = $this->conn->query($sql);
         while ($row = $result->fetch_assoc())
