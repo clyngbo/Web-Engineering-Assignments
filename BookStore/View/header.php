@@ -22,7 +22,7 @@ function getHeader()
             </td>
             <td style="text-align:right">
 		<form id="tfnewsearch" method="get" action="search.php">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
             <div class="tfclear"></div>                           
             </td> 

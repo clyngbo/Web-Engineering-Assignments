@@ -8,6 +8,52 @@ and open the template in the editor.
     Author     : eiva
 */
 
+.book_view h3 {
+    font-size: 2.8em;    
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+.book_view h4 {
+    font-size: 2em;    
+    margin-top: 0em;
+}
+
+.book_view img {
+    width: 150pt;
+    height: auto; 
+    float: left;
+}
+
+.book_view table p {
+    padding-left: 20pt;
+    font-size: 1.2em;
+    text-decoration: none;
+    font-weight:normal;
+}
+
+.book_view a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.book_view_categories p {
+    padding-left: 0px;
+    font-size: 1.2em;
+}
+
+.book_view table {
+    text-align: left;
+    margin-right: 100px;
+}
+
+.book_view_category_tag {
+    display: inline;
+    padding: 5px;
+    margin-right: 5px;
+    background-color: #00004d;
+}
+
 .book_list h4 {
     margin-top: 0pt;
 }

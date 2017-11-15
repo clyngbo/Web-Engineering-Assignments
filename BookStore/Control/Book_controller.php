@@ -60,7 +60,6 @@ class Book_controller {
         $categories = new ArrayObject();
         while ($row = $result->fetch_assoc())
         {
-            $book_id = $row['book_id'];
             $category_id = $row['category_id'];
             $category = new Category();
             $category = $category_ctr->loadCategory($category_id);
