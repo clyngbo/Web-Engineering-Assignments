@@ -4,6 +4,7 @@ include_once '../Model/Category.php';
 include_once '../Model/Order.php';
 include_once '../Model/Manager.php';
 include_once '../Model/BookOrder.php';
+include_once 'Category_controller.php';
 include_once 'DBConnection.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -92,7 +93,7 @@ class Book_controller {
     
     public function createBook(Book $book)
     {
-        $sql = "INSERT INTO `book` (`title`, `author`, `genre`, `price`, `inventory`, `description`, `added`, `discount`, `picture`) VALUES ('$book->title', '$book->author', '$book->genre', '$book->price', '$book->inventory', '$book->description');";
+        $sql = "INSERT INTO `book` (`title`, `author`, `genre`, `price`, `inventory`, `description`, `added`, `discount`, `picture`) VALUES ('$book->title', '$book->author', '$book->genre', '$book->price', '$book->inventory', '$book->description', NOW(), '$book->discount', '$book->picture');";
         return $this->conn->statementReturnID($sql);
     }
     

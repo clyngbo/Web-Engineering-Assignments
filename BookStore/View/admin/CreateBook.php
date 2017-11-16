@@ -18,6 +18,15 @@ if(isset($_POST['create-book-btn']))
     $book->inventory = $_POST['inventory'];
     $book->price = $_POST['price'];
     $book->title = $_POST['title'];
+    $book->discount = $_POST['discount'];
+    if(isset($_FILES['picture']) && $_FILES['picture']['error'] == 0)
+    {
+        $url_folder = "View/admin/pictures/";
+        $folder = "pictures/";
+        $book->picture = $url_folder . basename($_FILES["picture"]["name"]);
+        move_uploaded_file($_FILES['picture']['name'], $folder. basename($_FILES['picture']['name']));
+        
+    }
     $book->id = $book_ctr->createBook($book);
     foreach ($_POST['category'] as $cat)
     {
@@ -32,7 +41,7 @@ if(isset($_POST['create-book-btn']))
         <title>Create Book</title>
     </head>
     <body>
-        <?php? include_once 'menu.php'; ?>
+        <?php include_once 'menu.php'; ?>
         <form action="CreateBook.php" method="post" id="create-book-form">
             <table>
                 <tr>
@@ -48,6 +57,10 @@ if(isset($_POST['create-book-btn']))
                     <td><input type="text" name="price"></td>
                 </tr>
                 <tr>
+                    <td>Discount</td>
+                    <td><input type="text" name="discount"></td>
+                </tr>
+                <tr>
                     <td>Genre</td>
                     <td><input type="text" name="genre"></td>
                 </tr>
@@ -58,6 +71,10 @@ if(isset($_POST['create-book-btn']))
                 <tr>
                     <td>Description</td>
                     <td><textarea name="description"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Picture</td>
+                    <td><input accept="image/*" name="picture" type="file" id="picture"/></td>
                 </tr>
                 <tr>
                     <td>Category</td>
