@@ -34,7 +34,7 @@ class Category_controller {
      
     public function getAllCategories()
     {
-        $sql = "SELECT * FROM Category";
+        $sql = "SELECT * FROM Category ORDER BY name";
         $result = $this->conn->query($sql);
         $categories = new ArrayObject();
         while($row = $result->fetch_assoc())
