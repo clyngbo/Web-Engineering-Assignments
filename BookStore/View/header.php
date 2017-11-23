@@ -27,7 +27,17 @@ function getHeader()
             <div class="tfclear"></div>                           
             </td> 
             <td style="text-align:right">
-                <a href='cart.php' text-color='red'><img src="../Images/cart.png" style="height:50pt; width:50pt" /></a>                            
+                <a href='cart.php' text-color='red'>
+                    (<?php
+                        if(isset($_SESSION["cart_books"]) && count($_SESSION["cart_books"])>0) 
+                        {
+                           echo count($_SESSION["cart_books"]);
+                        } else {
+                            echo '0';
+                        }                            
+                    ?>)
+                    <img src="../Images/cart.png" style="height:50pt; width:50pt" />
+                </a> 
             </td>     
         </tr>
     </table>

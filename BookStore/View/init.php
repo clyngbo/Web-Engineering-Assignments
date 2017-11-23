@@ -1,17 +1,15 @@
 <?php
 
 session_start();
-foreach (glob("Model/*.php") as $filename)
+foreach (glob("../Model/*.php") as $filename)
 {
     include_once $filename;
 }
-foreach (glob("Control/*.php") as $filename)
+foreach (glob("../Control/*.php") as $filename)
 {
     include_once $filename;
 }
 
-include_once 'books.php';
-include_once 'cart.php';
 include_once 'categories.php';
 include_once 'footer.php';
 include_once 'header.php';
@@ -30,7 +28,6 @@ function getJS()
 
     echo '<script type="text/javascript" src="js.js"></script>';
 }
-?>
 
 
 

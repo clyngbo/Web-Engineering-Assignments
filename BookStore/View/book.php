@@ -7,8 +7,8 @@ if (!isset($_GET['id'])) {
     }
 
 $book = $book_controller->getBookByID($_GET['id']);
-$book_categories = $book_controller->getCategoriesForBook($book)
-
+$book_categories = $book_controller->getCategoriesForBook($book);
+$current_url = urlencode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 ?>
 <!DOCTYPE html>
  
@@ -62,7 +62,25 @@ $book_categories = $book_controller->getCategoriesForBook($book)
                    echo 'The book has no assigned categories.';
                }
                ?>
-            </div>             
+            </div>
+            <form method="post" action="cart_update.php">
+                 <label>
+                    <span>Quantity</span>
+                     <?php
+                        if (isset($_SESSION["cart_books"]) && isset($_SESSION["cart_books"][$book->id])) {
+                            $quantity = $_SESSION["cart_books"[$book->id]];
+                        } else {
+                            $quantity = 1;
+                        }
+                     ?>
+                    <input type="text" size="2" maxlength="2" name="book_quantity" value="<?php echo $quantity ?>" />
+                </label>
+    
+                <input type="hidden" name="book_id" value=<?php echo $book->id ?> />
+                <input type="hidden" name="type" value="add" />
+                <input type="hidden" name="return_url" value=<?php echo $current_url ?> />
+                <div align="center"><button type="submit" class="add_to_cart">Add to cart</button></div>
+            </form>
          </div>  
          </div>
      </body>
